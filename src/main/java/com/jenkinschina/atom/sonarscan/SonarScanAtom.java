@@ -70,7 +70,14 @@ public class SonarScanAtom implements AtomTask {
         }
         context.log("[sonar] " + String.join(" ", command));
 
-        Process process = builder.start();
+        Process process;
+        try {
+            process = builder.start();
+        } catch (java.io.IOException e) {
+            return AtomResult.error(ErrorType.ENVIRONMENT, 40006,
+                    "could not start " + scanner + ": " + e.getMessage()
+                            + " — install the scanner on this agent or set the scanner input to its full path");
+        }
         String output = drain(process, context);
         int code = process.waitFor();
         if (code != 0) {

@@ -1,7 +1,7 @@
 {
   "atomCode": "sonar-scan",
   "name": "SonarQube scan",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Runs sonar-scanner and, unless told not to, holds the build until the quality gate answers.",
   "execution": {
     "packagePath": "sonar-scan.jar",
