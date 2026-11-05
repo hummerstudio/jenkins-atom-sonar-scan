@@ -27,5 +27,5 @@ jobs:
         run: ./tools/smoke.sh
       - uses: actions/upload-artifact@v4
         with:
-          name: sonar-scan-atom
-          path: dist/sonar-scan/
+          name: sonar-atom
+          path: dist/sonar/

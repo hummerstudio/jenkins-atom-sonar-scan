@@ -35,9 +35,9 @@ mkdir -p "$classes/META-INF/services"
 cp src/main/resources/META-INF/services/* "$classes/META-INF/services/"
 ( cd "$sdk" && "$JAR" xf "$SDK_JAR" && rm -rf META-INF/MANIFEST.MF META-INF/services )
 
-rm -rf dist/sonar-scan
-mkdir -p dist/sonar-scan
-"$JAR" --create --file dist/sonar-scan/sonar-scan.jar -C "$classes" . -C "$sdk" .
-cp task.json dist/sonar-scan/
-[ -f meta.json ] && cp meta.json dist/sonar-scan/
-echo "built dist/sonar-scan: $(ls dist/sonar-scan | tr '\n' ' ')"
+rm -rf dist/sonar
+mkdir -p dist/sonar
+"$JAR" --create --file dist/sonar/sonar.jar -C "$classes" . -C "$sdk" .
+cp task.json dist/sonar/
+[ -f meta.json ] && cp meta.json dist/sonar/
+echo "built dist/sonar: $(ls dist/sonar | tr '\n' ' ')"

@@ -1,12 +1,12 @@
 {
-  "atomCode": "sonar-scan",
+  "atomCode": "sonar",
   "name": "SonarQube scan",
   "version": "1.0.1",
-  "description": "Runs sonar-scanner and, unless told not to, holds the build until the quality gate answers.",
+  "description": "Runs sonarner and, unless told not to, holds the build until the quality gate answers.",
   "execution": {
-    "packagePath": "sonar-scan.jar",
+    "packagePath": "sonar.jar",
     "language": "java",
-    "target": "$atom_java_path -cp sonar-scan.jar com.jenkinschina.atom.sdk.AtomRunner"
+    "target": "$atom_java_path -cp sonar.jar com.jenkinschina.atom.sdk.AtomRunner"
   },
   "input": {
     "projectKey": {
@@ -22,7 +22,7 @@
     "scanner": {
       "label": "scanner 命令",
       "type": "vuex-input",
-      "default": "sonar-scanner"
+      "default": "sonarner"
     },
     "sources": {
       "label": "源码目录",

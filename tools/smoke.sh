@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# sonar-scanner is faked: the point is the atom's contract (arguments, env token, report-task parsing, gate), not Sonar.
+# sonarner is faked: the point is the atom's contract (arguments, env token, report-task parsing, gate), not Sonar.
 set -uo pipefail
 cd "$(dirname "$0")/.."
 export BUILD_NUMBER=5 JOB_NAME=parcel
@@ -11,7 +11,7 @@ work="$(mktemp -d)"
 
 # a scanner that records its argv and writes what the real one writes
 mkdir -p "$work/bin"
-cat >"$work/bin/sonar-scanner" <<'SH'
+cat >"$work/bin/sonarner" <<'SH'
 #!/usr/bin/env bash
 printf '%s\n' "$@" > "$SMOKE_ARGV"
 [ -n "${SONAR_TOKEN:-}" ] && printf 'token-seen\n' > "$SMOKE_TOKEN"
@@ -24,7 +24,7 @@ ceTaskId=AX123
 ceTaskUrl=http://sonar.local/api/ce/task?id=AX123
 EOF
 SH
-chmod +x "$work/bin/sonar-scanner"
+chmod +x "$work/bin/sonarner"
 
 dir="$work/scan"; mkdir -p "$dir"
 export SMOKE_ARGV="$work/argv.txt" SMOKE_TOKEN="$work/token.txt" SMOKE_PROJECT=parcel

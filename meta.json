@@ -1,11 +1,11 @@
 {
   "name": "SonarQube scan",
-  "summary": "Runs sonar-scanner and, unless told not to, holds the build until the quality gate answers.",
+  "summary": "Runs sonarner and, unless told not to, holds the build until the quality gate answers.",
   "author": "hummerstudio",
   "license": "MIT",
   "tags": [
     "official-port",
-    "sonar-scan"
+    "sonar"
   ],
-  "homepage": "https://github.com/hummerstudio/jenkins-atom-sonar-scan"
+  "homepage": "https://github.com/hummerstudio/jenkins-atom-sonar"
 }

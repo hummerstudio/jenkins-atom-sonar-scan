@@ -1,4 +1,4 @@
-package com.jenkinschina.atom.sonarscan;
+package com.jenkinschina.atom.sonar;
 
 import com.jenkinschina.atom.sdk.AtomContext;
 import com.jenkinschina.atom.sdk.AtomResult;
@@ -25,14 +25,14 @@ import java.util.regex.Pattern;
  * <p>The scanner writes {@code .scannerwork/report-task.txt} with the dashboard URL and the compute-engine task;
  * reading it back is how the plugin shows a link instead of guessing one.
  */
-public class SonarScanAtom implements AtomTask {
+public class SonarAtom implements AtomTask {
 
     private static final Pattern VALUE = Pattern.compile("^([A-Za-z0-9_.]+)=(.*)$", Pattern.MULTILINE);
 
     @Override
     public AtomResult run(AtomContext context) throws Exception {
         Path workspace = context.getWorkspace();
-        String scanner = context.getParam("scanner", "sonar-scanner");
+        String scanner = context.getParam("scanner", "sonarner");
         String projectKey = context.getParam("projectKey", "");
         String hostUrl = context.getParam("hostUrl", "");
         String sources = context.getParam("sources", ".");
@@ -82,7 +82,7 @@ public class SonarScanAtom implements AtomTask {
         int code = process.waitFor();
         if (code != 0) {
             return AtomResult.error(ErrorType.THIRD_PART, 40002,
-                    "sonar-scanner exited " + code + ": " + tail(output));
+                    "sonarner exited " + code + ": " + tail(output));
         }
 
         Path reportTask = workspace.resolve(".scannerwork/report-task.txt");
