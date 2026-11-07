@@ -37,4 +37,4 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: sonar-atom
-          path: atom/dist/sonar/
+          path: atom/target/dist/sonar/
