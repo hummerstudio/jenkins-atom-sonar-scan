@@ -155,6 +155,9 @@ public class SonarAtom implements AtomTask {
                     .send(request.build(), HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8))
                     .body();
         } catch (Exception e) {
+            if (e instanceof InterruptedException) {
+                Thread.currentThread().interrupt();
+            }
             return "";
         }
     }
