@@ -31,6 +31,17 @@ public class SonarAtom implements AtomTask {
 
     @Override
     public AtomResult run(AtomContext context) throws Exception {
+        // Two actions, one atom: scan runs the scanner (and can hold for the gate), gate only reads the gate. The
+        // SonarQube integration is one thing in QuickBuild too, and a job that only checks a gate should not have to
+        // carry scanner settings it never uses.
+        String action = context.getParam("action", "scan").trim().toLowerCase(java.util.Locale.ROOT);
+        if (action.equals("gate")) {
+            return new SonarGate().run(context);
+        }
+        if (!action.isEmpty() && !action.equals("scan")) {
+            return AtomResult.error(ErrorType.USER, 40003,
+                    "action must be scan or gate, not '" + context.getParam("action", "") + "'");
+        }
         Path workspace = context.getWorkspace();
         String scanner = context.getParam("scanner", "sonarner");
         String projectKey = context.getParam("projectKey", "");

@@ -1,7 +1,7 @@
 {
   "atomCode": "sonar",
   "name": "SonarQube scan",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Runs sonarner and, unless told not to, holds the build until the quality gate answers.",
   "execution": {
     "packagePath": "sonar.jar",
@@ -9,6 +9,21 @@
     "target": "$atom_java_path -cp sonar.jar com.jenkinschina.atom.sdk.AtomRunner"
   },
   "input": {
+    "action": {
+      "label": "动作",
+      "type": "select",
+      "default": "scan",
+      "options": [
+        {
+          "label": "扫描（scan）",
+          "value": "scan"
+        },
+        {
+          "label": "只查质量门禁（gate）",
+          "value": "gate"
+        }
+      ]
+    },
     "projectKey": {
       "label": "项目 key（必填）",
       "type": "vuex-input",
@@ -59,6 +74,56 @@
       "type": "vuex-input",
       "default": "",
       "isSensitive": true
+    },
+    "sonarUrl": {
+      "label": "SonarQube 地址",
+      "type": "vuex-input",
+      "default": ""
+    },
+    "componentKey": {
+      "label": "分析组件 Key（默认同项目 Key）",
+      "type": "vuex-input",
+      "default": ""
+    },
+    "branch": {
+      "label": "分支（可选）",
+      "type": "vuex-input",
+      "default": ""
+    },
+    "pullRequest": {
+      "label": "Pull Request 号（可选）",
+      "type": "vuex-input",
+      "default": ""
+    },
+    "failOnWarning": {
+      "label": "WARN 也让这一步失败",
+      "type": "checkbox",
+      "default": "false"
+    },
+    "timeoutSeconds": {
+      "label": "超时（秒）",
+      "type": "vuex-input",
+      "default": "60"
+    },
+    "waitForAnalysis": {
+      "label": "先等这次的分析跑完（CE 任务）",
+      "type": "checkbox",
+      "default": "false"
+    },
+    "waitTimeoutSeconds": {
+      "label": "等分析的超时（秒，默认 300）",
+      "type": "vuex-input",
+      "default": "300"
+    },
+    "pollIntervalSeconds": {
+      "label": "查分析的间隔（秒，默认 10）",
+      "type": "vuex-input",
+      "default": "10"
+    },
+    "buildStatus": {
+      "label": "门禁红了怎么办（FAILURE / UNSTABLE）",
+      "type": "vuex-input",
+      "default": "FAILURE"
     }
   },
   "output": {
