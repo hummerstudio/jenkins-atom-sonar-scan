@@ -147,6 +147,7 @@
     },
     "secrets": {
       "sonarToken": ""
-    }
+    },
+    "category": "gate"
   }
 }
